@@ -1,22 +1,26 @@
+CS106_HOME = ~/cs/cs106X
+WORK_DIR  = $(shell pwd)
+DST_DIR   = $(WORK_DIR)/build
+$(shell mkdir -p $(DST_DIR))
+STANFORD_LIB := $(CS106_HOME)/stanfordLib/StanfordCPPLib
+STANFORD_LIB_DIRS := $(shell find $(STANFORD_LIB) -type d)
+INCFLAGS += $(addprefix -I, $(STANFORD_LIB_DIRS))
+OBJS      = $(addprefix $(DST_DIR)/, $(addsuffix .o, $(basename $(SRCS))))
+ARCHIVE   = $(WORK_DIR)/build/stanfordLib.a
+
+$(DST_DIR)/%.o: %.cpp
+	@mkdir -p $(dir $@) && echo + CXX $<
+	@g++ $(CXXFLAGS) -c -o $@ $(realpath $<)
+
+### Rule (archive): objects (`*.o`) -> `ARCHIVE.a` (ar)
+$(ARCHIVE): $(OBJS)
+#@echo + AR "->" $(shell realpath $@ --relative-to .)
+	@ar rcs $(ARCHIVE) $(OBJS)
+	
 git:
 	@git add . -A 
 	@(uname -a && uptime) | git commit -F - --allow-empty
 	@sync
 
 all:
-	echo all
-
-test:
-	g++ ./data.cpp -o data
-	g++ ./std.cpp -o std
-	while true; do
-		./data > data.in
-		../multimod-32 < data.in > main.out
-		./std < data.in > std.out
-	if diff std.out main.out ; then
-		printf AC
-	else 
-		echo WA
-		exit 0
-	fi
-	done
+	@echo $(INCFLAGS)
