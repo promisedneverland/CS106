@@ -11,7 +11,7 @@ int roundToNearestInt(double d) {
 }
 int main() {
     double a;
-    scanf("%f", &a);
-    printf("%f\n", roundToNearestInt(a));
+    scanf("%lf", &a);
+    printf("%d\n", roundToNearestInt(a));
     return 0;
 }

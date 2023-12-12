@@ -1,11 +1,13 @@
 include ../Makefile
 BUILD := ./build
 SRCS := data.cpp std.cpp test.cpp
+OBJS      = $(addprefix $(BUILD)/, $(basename $(SRCS)))
 $(shell mkdir -p $(BUILD))
 
 $(BUILD)/%: %.cpp
 	@g++ $(CFLAGS) $< $(LDFLAGS) -o $@
 
+build: $(OBJS)
 
 test: build
 	@while true; do \

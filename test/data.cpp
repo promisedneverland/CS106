@@ -5,6 +5,6 @@ using namespace std;
 int main() {
     srand(time(NULL));
     const int N = 100;
-    printf("%f\n", randomReal(-N, N));
+    printf("%d\n", rand());
     return 0;
 }
