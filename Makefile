@@ -1,7 +1,7 @@
 CS106_HOME = ~/cs/cs106X
 WORK_DIR  = $(shell pwd)
 DST_DIR   = $(WORK_DIR)/build
-$(shell mkdir -p $(DST_DIR))
+# $(shell mkdir -p $(DST_DIR))
 # STANFORD_LIB := $(CS106_HOME)/stanfordLib/StanfordCPPLib
 # STANFORD_LIB_DIRS := $(shell find $(STANFORD_LIB) -type d)
 
