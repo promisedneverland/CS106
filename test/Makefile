@@ -1,11 +1,12 @@
 include ../Makefile
-BUILD := build
+BUILD := ./build
+SRCS := data.cpp std.cpp test.cpp
+$(shell mkdir -p $(BUILD))
 
-build:
-	@mkdir -p $(BUILD)
-	@g++ $(CFLAGS) ./data.cpp $(LDFLAGS) -o $(BUILD)/data
-	@g++ $(CFLAGS) ./std.cpp $(LDFLAGS) -o $(BUILD)/std
-	@g++ $(CFLAGS) ./test.cpp $(LDFLAGS) -o $(BUILD)/test
+$(BUILD)/%: %.cpp
+	@g++ $(CFLAGS) $< $(LDFLAGS) -o $@
+
+
 test: build
 	@while true; do \
 		./$(BUILD)/data > $(BUILD)/data.in ; \
