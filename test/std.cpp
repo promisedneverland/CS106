@@ -4,7 +4,8 @@
 #include<cmath>
 using namespace std;
 int main() {
-    double a = getReal();
-    cout << round(a);
+    double a;
+    scanf("%f", &a);
+    printf("%f\n", round(a));
     return 0;
 }

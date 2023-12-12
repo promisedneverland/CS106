@@ -10,7 +10,8 @@ int roundToNearestInt(double d) {
     return d - 0.5;
 }
 int main() {
-    double a = getReal();
-    cout << roundToNearestInt(a);
+    double a;
+    scanf("%f", &a);
+    printf("%f\n", roundToNearestInt(a));
     return 0;
 }

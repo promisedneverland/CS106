@@ -3,8 +3,8 @@
 #include "random.h"
 using namespace std;
 int main() {
-    srand(time(0));
-    const int N = 10000;
-    cout << randomReal(-N, N);
+    srand(time(NULL));
+    const int N = 100;
+    printf("%f\n", randomReal(-N, N));
     return 0;
 }
