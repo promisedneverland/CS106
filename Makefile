@@ -19,7 +19,7 @@ $(ARCHIVE): $(OBJS)
 	
 git:
 	@git add . -A 
-	@(uname -a && uptime) | git commit -F - --allow-empty
+	@(uname -a && uptime) | git commit -F - -q --allow-empty
 	@sync
 
 all:
