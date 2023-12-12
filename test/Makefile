@@ -5,7 +5,7 @@ OBJS      = $(addprefix $(BUILD)/, $(basename $(SRCS)))
 $(shell mkdir -p $(BUILD))
 
 $(BUILD)/%: %.cpp
-	@g++ $(CFLAGS) $< $(LDFLAGS) -o $@
+	g++ $(CFLAGS) $< $(LDFLAGS) -o $@
 
 build: $(OBJS)
 
