@@ -9,7 +9,7 @@ $(BUILD)/%: %.cpp
 
 build: $(OBJS)
 run: build
-	@$(BUILD)/$(ID).out
+	@$(OBJS)
 
 clean:
 	@rm -rf ./build
