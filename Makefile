@@ -13,7 +13,7 @@ DST_DIR   = $(WORK_DIR)/build
 # OBJS      = $(addprefix $(DST_DIR)/, $(addsuffix .o, $(basename $(SRCS))))
 # ARCHIVE   = $(WORK_DIR)/build/stanfordLib.a
 
-CFLAGS += -std=c++11 -I /home/lcx/stanford/ -I /home/lcx/stanford/collections -I /home/lcx/stanford/graphics -I /home/lcx/stanford/io -I /home/lcx/stanford/private -I /home/lcx/stanford/system -I /home/lcx/stanford/util -L /home/lcx/stanford
+CFLAGS += -std=c++11 -ggdb -I /home/lcx/stanford/ -I /home/lcx/stanford/collections -I /home/lcx/stanford/graphics -I /home/lcx/stanford/io -I /home/lcx/stanford/private -I /home/lcx/stanford/system -I /home/lcx/stanford/util -L /home/lcx/stanford
 LDFLAGS += -lstanford -ldl -lpthread
 $(DST_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@) && echo + CXX $<

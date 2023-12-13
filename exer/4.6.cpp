@@ -21,9 +21,24 @@ string getRoot(string path){
 string getExtension(string path) {
     return path.substr(getRoot(path).length());
 }
+string defaultExtension(string path, string ext) {
+    if(getExtension(path) == "") {
+        return path + ext;
+    }
+    if(ext != "") {
+        if(ext[0] == '*') {
+            return getRoot(path) + ext.substr(1);
+        } else {
+            return path;
+        }
+    } else {
+        return path;
+    }
+    return "";
+}
 int main() {
-    string str;
-    cin >> str;
-    cout << getRoot(str) << endl << getExtension(str) << endl; 
+    string str, ext;
+    cin >> str >> ext;
+    cout << defaultExtension(str, ext) << endl; 
     return 0;
 }
