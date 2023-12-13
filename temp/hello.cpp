@@ -5,9 +5,11 @@
 #include<cmath>
 #include<string>
 #include <algorithm>
+#include<vector>
 using namespace std;
 
 int main() {
-    int ch, a; 
-    cout << ch << " " << a << endl;
+    Vector<int> iv;
+    Vector<Vector<int>> vv;
+    
 }
