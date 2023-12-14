@@ -11,5 +11,7 @@ using namespace std;
 int main() {
     Vector<int> iv;
     Vector<Vector<int>> vv;
-    
+    for(int i : iv) {
+        cout << i << endl;
+    } 
 }
