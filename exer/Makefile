@@ -1,16 +1,18 @@
 include ../Makefile
 ID = 3.3
 BUILD := ./build
-SRCS := $(ID).cpp
-OBJS      = $(addprefix $(BUILD)/, $(addsuffix .out, $(basename $(SRCS))))
-$(shell mkdir -p $(BUILD))
+SRCS := $(wildcard $(ID)/*.cpp)
+# OBJS      = $(addprefix $(BUILD)/$(ID), $(addsuffix .out, $(basename $(SRCS))))
+OBJS := $(BUILD)/$(ID)/$(ID).out
+$(shell mkdir -p $(BUILD)/$(ID))
 
-$(BUILD)/%: %.cpp
-	g++ $(CFLAGS) $< $(LDFLAGS) -o $@
+$(OBJS): $(SRCS)
+	g++ $(CFLAGS) $^ $(LDFLAGS) -o $@
 
 build: $(OBJS)
+
 run: build
-	@$(BUILD)/$(ID).out
+	@$(OBJS)
 
 clean:
 	@rm -rf ./build
