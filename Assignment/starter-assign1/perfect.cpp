@@ -8,6 +8,7 @@
 #include <iostream>
 #include "SimpleTest.h"
 #include "perfect.h"
+#include <cmath>
 using namespace std;
 
 /* The divisorSum function takes one argument `n` and calculates the
@@ -49,6 +50,9 @@ void findPerfects(long stop) {
         }
         if (num % 10000 == 0) cout << "." << flush; // progress bar
     }
+    // for(int i = 1; i <10; i++){
+    //     cout << i << "th" << findNthPerfectEuclid(i) << endl;
+    // }
     cout << endl << "Done searching up to " << stop << endl;
 }
 
@@ -57,7 +61,17 @@ void findPerfects(long stop) {
  */
 long smarterSum(long n) {
     /* TODO: Fill in this function. */
-    return 0;
+    long total = 0;
+    for(int i = 1; i <= sqrt(n); i++) {
+        if(n % i == 0) {
+            if(i == n / i) {
+                total += i;
+             } else {
+                total += (i + n / i);
+            }
+        }
+    }
+    return total - n;
 }
 
 /* TODO: Replace this comment with a descriptive function
@@ -65,7 +79,7 @@ long smarterSum(long n) {
  */
 bool isPerfectSmarter(long n) {
     /* TODO: Fill in this function. */
-    return false;
+    return smarterSum(n) == n;
 }
 
 /* TODO: Replace this comment with a descriptive function
@@ -73,6 +87,13 @@ bool isPerfectSmarter(long n) {
  */
 void findPerfectsSmarter(long stop) {
      /* TODO: Fill in this function. */
+    for (long num = 1; num < stop; num++) {
+        if (isPerfectSmarter(num)) {
+            cout << "Found perfect number: " << num << endl;
+        }
+        if (num % 10000 == 0) cout << "." << flush; // progress bar
+    }
+    cout << endl << "Done searching up to " << stop << endl;
 }
 
 /* TODO: Replace this comment with a descriptive function
@@ -80,7 +101,16 @@ void findPerfectsSmarter(long stop) {
  */
 long findNthPerfectEuclid(long n) {
     /* TODO: Fill in this function. */
-    return 0;
+    int found = 0;
+    long current_perfect = 0;
+    for(int k = 1; found < n; k++) {
+        long m = pow(2, k) - 1;
+        if(smarterSum(m) == 1) {
+            found++;
+            current_perfect = m * pow(2, k - 1);
+        }
+    }
+    return current_perfect;
 }
 
 
@@ -120,6 +150,17 @@ PROVIDED_TEST("Confirm 12 and 98765 are not perfect") {
     EXPECT(!isPerfect(98765));
 }
 
+PROVIDED_TEST("Confirm 6 and 28 are perfect") {
+    EXPECT_EQUAL(isPerfect(6), isPerfectSmarter(6));
+    EXPECT_EQUAL(isPerfect(8), isPerfectSmarter(8));
+    EXPECT_EQUAL(isPerfect(98765), isPerfectSmarter(98765));
+    EXPECT_EQUAL(isPerfect(28), isPerfectSmarter(28));
+}
+
+PROVIDED_TEST("Confirm 12 and 98765 are not perfect") {
+    EXPECT(!isPerfect(12));
+    EXPECT(!isPerfect(98765));
+}
 PROVIDED_TEST("Test oddballs: 0 and 1 are not perfect") {
     EXPECT(!isPerfect(0));
     EXPECT(!isPerfect(1));
@@ -129,6 +170,51 @@ PROVIDED_TEST("Confirm 33550336 is perfect") {
     EXPECT(isPerfect(33550336));
 }
 
+STUDENT_TEST("Confirm 33550336 is perfect") {
+    EXPECT(!isPerfect(-33550336));
+}
+STUDENT_TEST("Confirm 33550336 is perfect") {
+    EXPECT(!isPerfect(-3));
+}
+
+STUDENT_TEST("test smart sum") {
+    EXPECT_EQUAL(smarterSum(25), divisorSum(25));
+}
+
+STUDENT_TEST("test smart sum2") {
+    EXPECT_EQUAL(smarterSum(253), divisorSum(253));
+}
 PROVIDED_TEST("Time trial of findPerfects on input size 1000") {
     TIME_OPERATION(1000, findPerfects(1000));
+}
+
+STUDENT_TEST("Time trial of findPerfects on input size 10000") {
+    TIME_OPERATION(10000, findPerfects(10000));
+}
+
+STUDENT_TEST("Time trial of findPerfects on input size 100000") {
+    TIME_OPERATION(100000, findPerfects(100000));
+}
+
+
+STUDENT_TEST("Time trial of findPerfects on input size 200000") {
+    TIME_OPERATION(200000, findPerfects(200000));
+}
+
+
+STUDENT_TEST("Time trial of findPerfects on input size 1000") {
+    TIME_OPERATION(1000, findPerfectsSmarter(1000));
+}
+
+STUDENT_TEST("Time trial of findPerfects on input size 10000") {
+    TIME_OPERATION(10000, findPerfectsSmarter(10000));
+}
+
+STUDENT_TEST("Time trial of findPerfects on input size 100000") {
+    TIME_OPERATION(100000, findPerfectsSmarter(100000));
+}
+
+
+STUDENT_TEST("Time trial of findPerfects on input size 200000") {
+    TIME_OPERATION(200000, findPerfectsSmarter(200000));
 }
